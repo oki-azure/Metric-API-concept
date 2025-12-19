@@ -3,11 +3,17 @@ import { useState } from "react";
 
 export default function TokenScreen({ token }) {
     const [showToken, setShowToken] = useState(false);
-    
+
     const copyToken = () => {
         navigator.clipboard.writeText(token);
         alert("Token copied to clipboard!");
     };
+
+    const openDeepLink = () => {
+        const deepLink = `metricfinger://open?token=${token}`;
+        window.location.href = deepLink;
+    };
+
 
     return (
         <div className="space-y-6 text-center">
@@ -37,9 +43,13 @@ export default function TokenScreen({ token }) {
             >
                 Copy Token
             </button>
-            <button className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-                Deep Link (Coming Soon)
+            <button
+                onClick={openDeepLink}
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+            >
+                Open in App
             </button>
+
         </div>
     );
 }
